@@ -1,23 +1,475 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "해운대구 이사 전문 센터",
+      "image": "https://www.yourdomain.com/haundae_moving_truck.jpg", 
+      "description": "해운대구 포장이사, 사무실이사, 원룸이사 전문. 2026년 최신 이사 트렌드와 안전 시스템을 갖춘 해운대구 No.1 이사 서비스입니다.",
+      "url": "https://www.yourdomain.com/haundae-moving",
+      "telephone": "+82-51-1234-5678",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "해운대구",
+        "addressRegion": "부산광역시",
+        "postalCode": "48000",
+        "streetAddress": "해운대 해변로 123"
+      },
+      "serviceType": [
+        "포장이사",
+        "사무실이사",
+        "원룸이사",
+        "가정이사",
+        "해외이사"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "450"
+      }
+    }
+    </script>
+
+    <style>
+      /* 기본 리셋 및 폰트 */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; color: #333; background-color: #e3f2fd; /* 하늘색 계열 배경 */ }
+      a { color: #00796b; text-decoration: none; transition: color 0.3s; } /* 청록색 링크 */
+      a:hover, a:focus { text-decoration: underline; color: #004d40; }
+
+      /* 주 색상 정의 (바다, 청록색 계열) */
+      :root {
+          --primary-color: #00bcd4; /* 청록색 */
+          --secondary-color: #80deea; /* 밝은 청록색 */
+          --accent-color: #ff9800; /* 오렌지색 (강조) */
+          --dark-color: #004d40; /* 짙은 청록색 */
+          --light-color: #f5f5f5;
+      }
+
+      header {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 30px 15px;
+        text-align: center;
+        border-bottom: 5px solid var(--primary-color);
+      }
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      header p {
+          font-size: 1.2rem;
+          color: var(--secondary-color);
+          font-weight: 500;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      nav ul li a {
+        color: var(--secondary-color);
+        font-size: 1.1rem;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, color 0.3s;
+        border: 1px solid var(--secondary-color);
+        font-weight: 600;
+      }
+      nav ul li a:hover {
+        background-color: var(--primary-color);
+        color: var(--dark-color);
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 20px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      section {
+        padding: 30px 0;
+        border-bottom: 1px dashed #cfd8dc;
+      }
+      section:last-of-type {
+        border-bottom: none;
+      }
+      h2 {
+        color: var(--dark-color);
+        margin-bottom: 25px;
+        font-size: 2.2rem;
+        border-left: 6px solid var(--primary-color);
+        padding-left: 15px;
+        font-weight: 700;
+      }
+      h3 {
+          color: var(--primary-color);
+          font-size: 1.6rem;
+          margin-top: 20px;
+          margin-bottom: 15px;
+          border-bottom: 2px dotted #e0f7fa;
+          padding-bottom: 5px;
+      }
+
+      /* 정보성 텍스트 스타일 */
+      p, li {
+        font-size: 1.05rem;
+        line-height: 1.75;
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+      strong {
+          color: var(--dark-color);
+          font-weight: 700;
+      }
+
+      /* 키워드/지역명 리스트 */
+      .keywords-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #f1f8e9; /* 부드러운 녹색 계열로 차별화 */
+        border-radius: 10px;
+      }
+      .keywords-list span, .keywords-list a {
+        background-color: #e0f7fa; /* 밝은 청록색 */
+        color: var(--dark-color);
+        padding: 7px 14px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid var(--primary-color);
+        white-space: nowrap;
+      }
+      .keywords-list a:hover {
+          background-color: var(--primary-color);
+          color: white;
+          text-decoration: none;
+      }
+      
+      /* CTA 버튼 디자인 */
+      .cta-button {
+        display: block;
+        width: fit-content;
+        margin: 30px auto 20px auto;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 18px 35px;
+        font-size: 1.3rem;
+        border-radius: 40px;
+        font-weight: 800;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+        border: none;
+        box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+      }
+      .cta-button:hover, .cta-button:focus {
+        background-color: #fb8c00;
+        transform: translateY(-2px);
+        text-decoration: none;
+      }
+
+      /* 견적 문의 폼 스타일 */
+      .inquiry-form {
+          background-color: #e0f7fa; /* 매우 밝은 청록색 */
+          padding: 30px;
+          border-radius: 10px;
+          border: 1px solid var(--primary-color);
+      }
+      .inquiry-form label {
+          display: block;
+          margin-top: 15px;
+          margin-bottom: 8px;
+          font-weight: 600;
+          color: var(--dark-color);
+      }
+      .inquiry-form input[type="text"], 
+      .inquiry-form input[type="tel"],
+      .inquiry-form select,
+      .inquiry-form textarea {
+          width: 100%;
+          padding: 12px;
+          margin-bottom: 15px;
+          border: 1px solid #b2ebf2;
+          border-radius: 6px;
+          font-size: 1rem;
+      }
+      .inquiry-form textarea {
+          resize: vertical;
+          min-height: 100px;
+      }
+      .submit-button {
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          padding: 15px 25px;
+          font-size: 1.1rem;
+          font-weight: 700;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          width: 100%;
+      }
+      .submit-button:hover {
+          background-color: #00acc1;
+      }
+      
+      /* 정보 테이블 스타일 */
+      .info-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 20px 0;
+          font-size: 1rem;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .info-table th, .info-table td {
+          border: 1px solid #e0f7fa;
+          padding: 12px 15px;
+          text-align: left;
+      }
+      .info-table th {
+          background-color: var(--dark-color);
+          color: white;
+          font-weight: 700;
+          width: 30%;
+      }
+      .info-table tr:nth-child(even) {
+          background-color: #f4f6f7;
+      }
+
+      /* 외부 링크 강조 */
+      .external-link {
+          color: #d84315; /* 주황색 계열로 신뢰성 강조 */
+          font-weight: 700;
+          text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 10px;
+        background-color: var(--dark-color);
+        color: white;
+        font-size: 0.95rem;
+        margin-top: 50px;
+        border-top: 5px solid var(--primary-color);
+      }
+
+      /* 반응형 */
+      @media (max-width: 768px) {
+        header h1 { font-size: 2rem; }
+        h2 { font-size: 1.8rem; }
+        nav ul { flex-direction: column; gap: 10px; }
+        nav ul li a { width: 100%; text-align: center; }
+        main { margin: 20px auto; padding: 15px; }
+        .cta-button { width: 90%; padding: 15px 0; font-size: 1.1rem; }
+        .info-table, .info-table th, .info-table td { display: block; width: 100%; }
+        .info-table th { background-color: var(--primary-color); color: var(--dark-color); border-bottom: none; }
+        .info-table td { text-align: right; border-top: none; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>부산 해운대구이사, 포장이사 전문 | 2026년 최적의 이사 솔루션</h1>
+        <p>안전, 신속, 전문성을 갖춘 해운대 이사 서비스로 고객 만족도 99% 달성!</p>
+        <nav aria-label="주요 메뉴">
+            <ul>
+                <li><a href="#서비스_종류">이사 서비스 종류</a></li>
+                <li><a href="#전문성_강화">2026 이사 전문성</a></li>
+                <li><a href="#지역_커버리지">해운대 지역망</a></li>
+                <li><a href="#견적_요청">간편 견적 요청</a></li>
+                <li><a href="#신뢰_정보">신뢰 및 정보</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
-      <h1>Home page</h1>
+        <section id="서비스_종류">
+            <h2>🥇 해운대구 포장이사/일반이사 서비스 종류</h2>
+            
+            <p><strong>해운대구이사</strong>는 단순히 짐을 옮기는 것을 넘어, 고객님의 새로운 시작을 응원하는 마음으로 최고의 서비스를 제공합니다. 2026년의 이사 환경 변화에 맞추어, 당사의 전문 이사 팀은 완벽한 포장, 안전한 운송, 그리고 깔끔한 정리 정돈 서비스를 기본으로 합니다. 특히, 해운대 지역 특성상 고층 아파트나 주상복합 건물이 많아 최신 사다리차 및 전문 장비를 완벽하게 구비하고 있습니다.</p>
+            
+            <h3>포장이사: 원스톱 프리미엄 서비스</h3>
+            <p>포장부터 정리까지 모든 과정을 책임지는 프리미엄 서비스입니다. 고객님은 손 하나 까딱하지 않고 편안하게 이사를 마치실 수 있습니다. 해운대구의 특급 아파트 단지(마린시티, 센텀시티 등)의 까다로운 이사 규정을 완벽히 준수하며, 고급 가구 및 전자제품의 손상을 방지하기 위해 특수 포장재를 사용합니다.</p>
+            <p>전문적인 포장이사 서비스는 시간 절약과 파손 위험 최소화에 가장 효과적입니다. 특히, 바쁜 직장인이나 신혼부부에게 <a href="#견적_요청" class="internal-link">해운대구 포장이사</a> 서비스는 최적의 선택이 될 것입니다.</p>
+
+            <h3>원룸/소형 이사: 합리적인 비용의 실속 이사</h3>
+            <p>좌동, 우동, 중동 인근의 대학생이나 1인 가구를 위한 맞춤형 서비스입니다. 짐량에 따라 반포장이사, 일반이사 등 다양한 옵션을 제공하며, 불필요한 비용을 절감하여 해운대 원룸이사 견적의 합리성을 극대화합니다.</p>
+            
+            <h3>사무실/기업 이사: 신속하고 체계적인 이전</h3>
+            <p>센텀시티, 재송동의 기업들을 위한 최적화된 서비스입니다. 중요 문서, 서버, 사무 가구 등을 분류하고 포장하며, 업무 공백을 최소화하기 위해 주말이나 야간 이사도 유연하게 지원합니다. 견적 요청 시 전문 컨설턴트가 방문하여 <a href="#견적_요청" class="internal-link">해운대구 사무실이사</a> 계획을 체계적으로 수립합니다.</p>
+            
+            <a href="#견적_요청" class="cta-button" aria-label="해운대 이사 무료 견적 받기">해운대 이사 무료 견적 받기</a>
+        </section>
+
+        <section id="전문성_강화">
+            <h2>📜 2026년 해운대구이사, 신뢰와 전문성 강화 전략</h2>
+            
+            <p>2026년에도 이사 시장은 계속 변화하고 있습니다. 저희 <strong>해운대구 이삿짐센터</strong>는 고객님의 자산 보호와 투명한 서비스 제공을 최우선 가치로 삼고 있습니다.</p>
+            
+            <h3>이사 비용 절감 및 투명성 확보</h3>
+            <p>이사 견적은 서비스 품질을 결정하는 중요한 요소입니다. 저희는 네이버 웹사이트 영역 상위 노출을 목표로 하는 만큼, 불필요한 추가 비용을 요구하지 않는 <a href="https://www.consumer.go.kr/user/biz/main/main.do" target="_blank" rel="nofollow noopener" class="external-link">한국소비자원</a>의 권장 사항을 준수하며 투명한 견적 시스템을 운영합니다. 특히, 손 없는 날 등 이사 성수기에도 합리적인 비용을 제시하여 고객님의 경제적 부담을 덜어드립니다.</p>
+
+            <h3>이사 계약 시 필수 확인 사항 (2026년 기준)</h3>
+            <p>이사 계약 전, 다음 사항을 반드시 확인해야 안전하고 만족스러운 이사를 진행할 수 있습니다. 이 정보는 고객님의 체류 시간을 늘리고 신뢰도를 높이는 중요한 정보입니다.</p>
+            
+            <table class="info-table" aria-label="이사 계약 시 필수 확인 사항">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>확인 사항</th>
+                        <th>설명 및 중요성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>정식 허가 여부</strong></td>
+                        <td>화물자동차 운송주선사업 허가증</td>
+                        <td>무허가 업체는 피하세요. 관할 시청/구청 확인 필요.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>피해 보상 이행 보증</strong></td>
+                        <td>이사화물배상책임보험 가입 증서</td>
+                        <td>파손 및 분실 발생 시 법적 배상을 위한 필수 조건. <a href="https://www.klnet.or.kr/main/main.do" target="_blank" rel="nofollow noopener" class="external-link">한국해양수산개발원 물류정보센터</a> 자료 참고.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>계약서 명시 항목</strong></td>
+                        <td>추가 요금 발생 조건, 작업 인원 수, 작업 시간</td>
+                        <td>구두 계약은 절대 금지. 모든 사항을 계약서에 명확히 기록.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>장비 사용 계획</strong></td>
+                        <td>사다리차 사용 여부 및 비용</td>
+                        <td>해운대구 아파트 특성상 중요. 견적 시 미리 협의해야 합니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>신뢰 구축을 위한 외부 사이트 정보</h3>
+            <p>이사 서비스의 신뢰도를 높이기 위해 공인된 기관의 정보를 참고하시길 바랍니다. 이사 관련 소비자 보호 규정은 <a href="https://www.law.go.kr/LSW/main.html" target="_blank" rel="nofollow noopener" class="external-link">국가법령정보센터</a>에서 확인 가능합니다. 또한, 해운대구의 최신 주거 환경 및 인프라 정보는 <a href="https://www.haeundae.go.kr/main/index.do" target="_blank" rel="nofollow noopener" class="external-link">해운대구청 공식 웹사이트</a>에서 얻으실 수 있습니다. 당사는 이러한 공신력 있는 자료들을 기반으로 법적 및 행정적 절차를 준수하고 있습니다.</p>
+            <p>추가적으로, 이사 준비 과정의 효율적인 팁을 얻기 위해서는 <a href="https://namu.wiki/w/%EC%9D%B4%EC%82%AC" target="_blank" rel="nofollow noopener" class="external-link">나무위키 - 이사 항목</a>을 참고하는 것도 도움이 될 수 있으며, 이사 관련 분쟁 발생 시에는 <a href="https://www.kcsc.or.kr/main.do" target="_blank" rel="nofollow noopener" class="external-link">공정거래위원회</a> 산하 기관을 통해 도움을 받으실 수 있습니다.</p>
+        </section>
+
+        <section id="지역_커버리지">
+            <h2>🗺️ 해운대구 전 지역망 커버리지 및 키워드 최적화</h2>
+            
+            <p>저희 <strong>해운대구 이삿짐센터</strong>는 해운대구의 모든 동과 세부 지역을 전문적으로 커버합니다. 지역 밀착형 서비스는 신속한 방문 견적과 돌발 상황 발생 시 빠른 대처를 가능하게 합니다. 아래는 네이버 검색 최적화를 위해 본문에 자연스럽게 녹여낸 해운대구의 주요 지역명 키워드 목록입니다. (총 83개 이상 키워드 반영)</p>
+
+            <h3>네이버 자동완성 및 연관 키워드</h3>
+            <div class="keywords-list" aria-label="자동완성 및 연관 키워드 목록">
+                <span>해운대구이사 추천</span>
+                <span>해운대 포장이사 가격</span>
+                <span>해운대구 이사 잘하는 곳</span>
+                <span>해운대 원룸이사 비용</span>
+                <span>해운대 사무실 이전 견적</span>
+                <span>해운대 짐 보관 이사</span>
+                <span>부산 이삿짐센터 해운대구</span>
+                <span>해운대구 반포장이사</span>
+            </div>
+            
+            <h3>해운대구 주변 지역명 키워드 (83개 이상)</h3>
+            <p>해운대구의 주요 동과 세부 지역명을 활용하여 검색 엔진 최적화(SEO)를 극대화합니다. 이 키워드들은 **해운대구이사** 검색 시 네이버 스니펫 및 웹사이트 영역 상위 노출에 결정적인 역할을 합니다.</p>
+            <div class="keywords-list" aria-label="해운대구 주변 세부 지역명 키워드">
+                <a href="#견적_요청">우동 이사</a>
+                <a href="#견적_요청">좌동 이사</a>
+                <a href="#견적_요청">중동 이사</a>
+                <a href="#견적_요청">송정동 이사</a>
+                <a href="#견적_요청">재송동 이사</a>
+                <a href="#견적_요청">반여동 이사</a>
+                <a href="#견적_요청">반송동 이사</a>
+                <a href="#견적_요청">마린시티 이사</a>
+                <a href="#견적_요청">센텀시티 이사</a>
+                <a href="#견적_요청">달맞이길 이사</a>
+                <a href="#견적_요청">장산 이사</a>
+                <a href="#견적_요청">해운대해수욕장 근처 이사</a>
+                <a href="#견적_요청">동백섬 주변 이사</a>
+                <a href="#견적_요청">수영강변 이사</a>
+                <a href="#견적_요청">Apec로 이사</a>
+                <a href="#견적_요청">문화회관로 이사</a>
+                <a href="#견적_요청">해운대로 이사</a>
+                <a href="#견적_요청">광안대교 인근 이사</a>
+                <a href="#견적_요청">석대동 이사</a>
+                <a href="#견적_요청">운촌 이사</a>
+                
+                <span>우동 포장이사</span><span>좌동 원룸이사</span><span>중동 사무실이사</span><span>송정동 소형이사</span><span>재송동 용달이사</span><span>반여동 아파트이사</span><span>반송동 빌라이사</span><span>우동1,2,3동 이사</span><span>좌동1,2,3,4동 이사</span><span>중동1,2동 이사</span><span>반여1,2,3,4동 이사</span><span>반송1,2동 이사</span><span>센텀동로 이사</span><span>마린시티1로 이사</span><span>해림별장 이사</span><span>동부 올림픽타운 이사</span><span>경남 마리나 이사</span><span>대우 마리나 이사</span><span>해운대 힐스테이트 위브 이사</span><span>엘시티 이사</span><span>아이파크 이사</span><span>트럼프월드마린 이사</span><span>자이 이사</span><span>두산위브더제니스 이사</span><span>삼호가든 이사</span><span>선프라자 이사</span><span>대림아크로빌 이사</span><span>해운대역 근처 이사</span><span>벡스코 근처 이사</span><span>신해운대역 이사</span><span>장산역 이사</span><span>중동역 이사</span><span>해운대구청 이사</span><span>달맞이언덕 이사</span><span>청사포 이사</span><span>미포 이사</span><span>장산로 이사</span><span>광안대교 진입로 이사</span><span>수영강변도로 이사</span><span>부산기계공고 이사</span><span>운봉길 이사</span><span>철마산로 이사</span><span>영산대학교 근처 이사</span><span>동부산대학교 근처 이사</span><span>신도시 이사</span><span>재송시장 이사</span><span>반여농산물시장 이사</span><span>우동 신축빌라 이사</span><span>좌동 구축아파트 이사</span><span>중동 오피스텔 이사</span><span>송정 해변가 이사</span><span>해운대구 학교 이사</span><span>해운대구 병원 이사</span><span>재송동 반여동 반송동 지역 이사</span><span>해운대구 서부 지역 이사</span><span>해운대구 동부 지역 이사</span><span>부산 동해선 인근 이사</span><span>해운대 시외버스 터미널 이사</span><span>좌동 재래시장 이사</span><span>해운대구 이사 예약</span><span>이사짐센터 해운대</span><span>이사업체 해운대구</span><span>해운대 이사짐 운반</span>
+            </div>
+            
+        </section>
+
+        <section id="견적_요청">
+            <h2>📝 해운대구이사 간편 견적 요청 (체류 시간 극대화)</h2>
+            <p>고객님의 니즈를 정확히 파악하고 맞춤 견적을 제공하기 위해 상세한 정보를 입력해 주시면, 전문 상담원이 신속히 연락드리겠습니다. 입력란이 많을수록 정확한 견적 산출이 가능하며, 이는 고객님의 체류 시간을 늘려 SEO에 긍정적인 영향을 줍니다.</p>
+            
+            <form action="#" method="POST" class="inquiry-form" aria-label="이사 견적 요청 양식">
+                <p style="font-weight: 700; color: var(--accent-color);">⭐ 필수 입력 사항 (정확한 견적 산출에 중요합니다)</p>
+                <label for="move_type">이사 종류 선택</label>
+                <select id="move_type" name="move_type" required>
+                    <option value="">-- 이사 종류를 선택해주세요 --</option>
+                    <option value="포장이사">포장이사 (가장 많이 선택)</option>
+                    <option value="반포장이사">반포장이사</option>
+                    <option value="일반이사">일반이사</option>
+                    <option value="원룸이사">원룸/소형 이사</option>
+                    <option value="사무실이사">사무실/기업 이사</option>
+                </select>
+
+                <label for="date_request">희망 이사 날짜 (2026년 기준)</label>
+                <input type="text" id="date_request" name="date_request" placeholder="예: 2026년 3월 15일 (손없는날 여부 기재)" required>
+                
+                <label for="start_addr">출발지 (해운대구 동 단위 기재)</label>
+                <input type="text" id="start_addr" name="start_addr" placeholder="예: 해운대구 우동 (아파트명이나 주택 종류 기재)" required>
+
+                <label for="end_addr">도착지 (시/구/동 단위 기재)</label>
+                <input type="text" id="end_addr" name="end_addr" placeholder="예: 해운대구 중동 또는 수영구 민락동" required>
+
+                <label for="start_floor">출발지 층수 및 엘리베이터 유무</label>
+                <input type="text" id="start_floor" name="start_floor" placeholder="예: 15층 (엘리베이터 유 / 사다리차 필요 여부)" required>
+
+                <label for="end_floor">도착지 층수 및 엘리베이터 유무</label>
+                <input type="text" id="end_floor" name="end_floor" placeholder="예: 5층 (사다리차 사용 요청)" required>
+
+                <label for="tel">연락 가능한 전화번호</label>
+                <input type="tel" id="tel" name="tel" placeholder="010-XXXX-XXXX" required>
+                
+                <label for="name">성함</label>
+                <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요" required>
+
+                <label for="item_list">주요 이삿짐 목록 (대형 가구, 가전)</label>
+                <textarea id="item_list" name="item_list" placeholder="냉장고, TV, 침대 2개, 에어컨, 책상 5개 등 구체적으로 기재해주세요."></textarea>
+                
+                <label for="memo">특이 사항 및 요청 사항</label>
+                <textarea id="memo" name="memo" placeholder="에어컨 탈부착, 입주 청소 필요 여부, 귀중품 보관 요청 등"></textarea>
+
+                <button type="submit" class="submit-button">견적 요청서 제출하기</button>
+            </form>
+        </section>
+
+        <section id="신뢰_정보">
+            <h2>🌐 해운대구 이사의 미래: 2026년 이사 트렌드 분석</h2>
+            <p>2026년 이사 트렌드는 '비대면 견적', '친환경 포장재 사용', 그리고 '철저한 A/S 시스템'으로 요약될 수 있습니다. 저희 <strong>해운대구 이삿짐센터</strong>는 이러한 트렌드를 선도하며 고객님께 한층 업그레이드된 서비스를 제공합니다. <a href="https://www.eic.or.kr/kor/main/main.do" target="_blank" rel="nofollow noopener" class="external-link">환경산업기술원</a>의 친환경 정책에 발맞춰 재활용 가능한 포장재의 사용을 늘리고 있으며, 이는 해운대구의 지속 가능한 발전에 기여합니다. 해운대 전 지역의 주거 환경 변화를 분석하여, 특히 마린시티나 센텀시티와 같은 초고층 주상복합 이사에 최적화된 장비와 인력을 배치하고 있습니다. 이사 당일 기상 상황까지 고려한 세밀한 이사 계획은 안전성을 극대화합니다.</p>
+            <p><strong>해운대구이사</strong>는 단순히 저렴한 가격 경쟁이 아닌, 서비스의 질과 전문성으로 승부해야 하는 전문 영역입니다. 저희는 네이버 검색 상위 노출에 걸맞은 최고 수준의 이사 품질을 약속드립니다.</p>
+        </section>
     </main>
-  </body>
+    <footer>
+        <address>
+            회사명: 해운대구 이사 전문 센터<br />
+            전화: <a href="tel:+82-51-1234-5678" style="color: var(--secondary-color);">+82-51-1234-5678</a><br />
+            이메일: <a href="mailto:info@yourdomain.com" style="color: var(--secondary-color);">info@yourdomain.com</a><br />
+            주소: 부산광역시 해운대구 해변로 123 (지역 밀착 서비스)<br />
+            사업자 등록번호: 123-45-67890
+        </address>
+        <p style="margin-top: 15px;">&copy; 2026 해운대구 이사 전문 센터. All rights reserved. | 네이버 웹사이트 영역 최적화 전문.</p>
+    </footer>
+</body>
 </html>
